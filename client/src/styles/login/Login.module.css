@@ -1,0 +1,116 @@
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    min-height: 100vh;
+    background-color: var(--bg_2);
+}
+
+.main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main_header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+
+    p {
+        font-size: 1.4rem;
+        color: var(--text_3);
+    }
+
+    a {
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--uni_2);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.main_body {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+
+    .form_area {
+        width: 100%;
+        max-width: 420px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            max-width: 120px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--text_4);
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            input {
+                font-size: 1.4rem;
+                color: var(--text_3);
+                background-color: #fff;
+                border: 1px solid #ececec;
+                border-radius: 5px;
+                outline: none;
+                padding: 14px;
+
+                &::placeholder {
+                    color: var(--text_3);
+                }
+
+                &:focus {
+                    border-color: #acacac;
+                }
+            }
+
+            p {
+                font-size: 1.2rem;
+                color: #b80f0f;
+            }
+
+            button {
+                font-size: 1.4rem;
+                color: var(--text_1);
+                background-color: var(--uni_1);
+                border: none;
+                border-radius: 5px;
+                outline: none;
+                padding: 14px;
+                margin-top: 20px;
+                cursor: pointer;
+                transition: .2s ease;
+
+                &:hover {
+                    opacity: 90%;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 820px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}

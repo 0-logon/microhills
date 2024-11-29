@@ -1,0 +1,22 @@
+.component {
+    font-size: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+        animation: loader .6s linear infinite;
+    }
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(0.9); /* Glatki prelaz na manju skalu */
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}

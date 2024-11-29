@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --uni_1: #4B70F5;
+  --uni_2: #3f5ecf;
+
+  --bg_1: #1b1d2a;
+  --bg_2: #f6f7f9;
+
+  --text_1: #FFFFFF;
+  --text_2: #e7e7e7;
+  --text_3: #636363;
+  --text_4: #232323;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}

@@ -1,0 +1,6 @@
+.layout {
+    display: grid;
+    grid-template-columns: 260px auto;
+    height: 100vh;
+    background-color: var(--bg_2);
+}
