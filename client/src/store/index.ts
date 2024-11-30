@@ -1,6 +1,8 @@
 // store/index.ts
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer, { AuthState } from './slices/authSlice';
+import screenReducer from './slices/screenSlice';
+import { tasksReducer } from './slices/tasksSlice';
 
 // Učitavanje prethodnog stanja iz localStorage
 const loadAuthState = (): AuthState => {
@@ -28,11 +30,17 @@ const preloadedAuthState = loadAuthState();
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    screen: screenReducer,
+    tasks: tasksReducer,
   },
   preloadedState: { auth: preloadedAuthState },
 });
 
 // Pretplata za čuvanje stanja pri promeni
 store.subscribe(() => saveAuthState(store.getState()));
+
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;
