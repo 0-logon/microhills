@@ -5,6 +5,7 @@ interface Task {
     id: number;
     title: string;
     description: string;
+    createdAt: string;
 }
 
 // Definišemo inicijalno stanje
@@ -12,12 +13,16 @@ interface TasksState {
     tasks: Task[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
+    charCount: number;
+    activityOverview: { day: string; value: number }[];
 }
 
 const initialState: TasksState = {
     tasks: [],
     status: 'idle',
     error: null,
+    charCount: 0,
+    activityOverview: []
 };
 
 // Asinkrona funkcija za dohvatanje zadataka
@@ -70,6 +75,22 @@ const tasksSlice = createSlice({
             .addCase(fetchTasks.fulfilled, (state, action: PayloadAction<Task[]>) => {
                 state.status = 'succeeded';
                 state.tasks = action.payload;
+
+                state.charCount = action.payload.reduce((total, task) => {
+                  return total + (task.description?.length || 0);
+              }, 0);
+
+              const activityMap: { [key: string]: number } = {};
+              action.payload.forEach((task) => {
+                  const date = new Date(task.createdAt).toISOString().split('T')[0]; // Format: YYYY-MM-DD
+                  activityMap[date] = (activityMap[date] || 0) + 1;
+              });
+          
+              state.activityOverview = Object.entries(activityMap).map(([day, value]) => ({
+                  day,
+                  value,
+              }));
+
             })
             .addCase(fetchTasks.rejected, (state, action: PayloadAction<any>) => {
                 state.status = 'failed';

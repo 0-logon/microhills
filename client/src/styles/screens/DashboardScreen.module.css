@@ -7,3 +7,7 @@
     font-weight: 500;
     color: var(--text_4);
 }
+
+.body {
+    margin-top: 20px;
+}
