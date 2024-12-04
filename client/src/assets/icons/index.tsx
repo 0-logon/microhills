@@ -103,7 +103,7 @@ export const SettingsIcon: React.FC = () => (
   </svg>
 );
 
-export const BurgerIcon: React.FC = ()=> (
+export const BurgerIcon: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="18"
@@ -126,6 +126,21 @@ export const CloseIcon: React.FC = () => (
     <path
       fill="#fff"
       d="M8.586 10 .793 2.207 2.207.793 10 8.586 17.793.793l1.414 1.414L11.414 10l7.793 7.793-1.414 1.414L10 11.414l-7.793 7.793-1.414-1.414z"
+    ></path>
+  </svg>
+);
+
+export const BinIcon: React.FC = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    fill="none"
+    viewBox="0 0 20 20"
+  >
+    <path
+      fill="#666666"
+      d="M15 4h5v2h-2v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6H0V4h5V1a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm1 2H4v12h12zM7 2v2h6V2z"
     ></path>
   </svg>
 );

@@ -3,31 +3,32 @@ import styles from '../../styles/widgets/Widgets.module.css';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Label } from 'recharts';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import {AppConfig} from '../../config/config';
 
 type DataItem = {
   name: string;
   value: number;
 };
 
-const UssageWidget = () => {
+const UsageWidget = () => {
   const { tasks, status, error, charCount } = useSelector((state: RootState) => state.tasks);
   const [percentage, setPercentage] = useState<number>(0);
 
-  const ussageLimit: number = 10000;
+  const usageLimit: number = AppConfig.USAGE_LIMIT;
 
   const data: DataItem[] = [
     { name: 'Used space', value: charCount },
-    { name: 'Free space', value: ussageLimit }
+    { name: 'Free space', value: usageLimit }
   ];
 
   const COLORS: string[] = ['#8884d8', '#b9b7e4'];
 
   useEffect(()=> {
-    setPercentage(parseFloat((charCount / ussageLimit * 100).toFixed(2)));
+    setPercentage(parseFloat((charCount / usageLimit * 100).toFixed(2)));
   })
   return (
-    <div className={`${styles.widget} ${styles.ussage_widget}`}>
-      <h2>Ussage Overview</h2>
+    <div className={`${styles.widget} ${styles.usage_widget}`}>
+      <h2>Usage Overview</h2>
       <div className={styles.widget_body}>
         <ResponsiveContainer width="100%" height={120}>
           <PieChart>
@@ -51,8 +52,8 @@ const UssageWidget = () => {
             </Pie>
           </PieChart>
         </ResponsiveContainer>
-        <div className={styles.ussage_info}>
-          <p>{`You've used ${charCount} / ${ussageLimit} characters.`}</p>
+        <div className={styles.usage_info}>
+          <p>{`You've used ${charCount} / ${usageLimit.toLocaleString('en-US')} characters.`}</p>
           <p>Stay productive and manage your content effortlessly!</p>
           <p>Need More Space? <a href="/">Upgrade Plan</a></p>
 
@@ -62,4 +63,4 @@ const UssageWidget = () => {
   )
 }
 
-export default UssageWidget;
+export default UsageWidget;

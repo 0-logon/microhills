@@ -1,0 +1,128 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        font-size: 2.4rem;
+        font-weight: 500;
+        color: var(--text_4);
+    }
+
+    button {
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: var(--text_1);
+        padding: 8px 20px;
+        background-color: var(--uni_1);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--uni_2);
+        }
+    }
+}
+
+.body {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &>p {
+        font-size: 1.2rem;
+        color: var(--text_3);
+    }
+}
+
+.editor {
+    padding: 20px;
+    background-color: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    input {
+        width: 100%;
+        font-size: 1.2rem;
+        color: var(--text_3);
+        background-color: #fff;
+        border: 1px solid #ececec;
+        border-radius: 5px;
+        outline: none;
+        padding: 8px 10px;
+
+        &::placeholder {
+            color: var(--text_3);
+        }
+
+        &:focus {
+            border-color: #acacac;
+        }
+
+        &:nth-of-type(1) {
+            max-width: 320px;
+        }
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: var(--text_3);
+        white-space: nowrap;
+    }
+}
+
+.tasks_box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    .task_card {
+        position: relative;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #FFFFFF;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text_4);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: var(--text_4);
+        }
+
+      .task_actions  button {
+            display: none;
+        }
+
+        &:hover .task_actions button{
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 30px;
+            height: 30px;
+            padding: 4px;
+            background-color: #ececec;
+            border: none;
+            border-radius: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e2e2e2;
+            }
+        }
+    }
+}

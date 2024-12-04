@@ -35,13 +35,13 @@ const Sidebar: React.FC = () => {
                 </div>
                 <div className={styles.navigation}>
                     <button
-                        onClick={() => handleScreen("Dashboard")}
+                        onClick={() => {handleScreen("Dashboard"), setOpened(false)}}
                         className={activeScreen === 'Dashboard' ? styles.active_btn : ''}
                     >
                         <DashboardIcon /> Dashboard
                     </button>
                     <button
-                        onClick={() => handleScreen("Tasks")}
+                        onClick={() => {handleScreen("Tasks"), setOpened(false)}}
                         className={activeScreen === 'Tasks' ? styles.active_btn : ''}
                     >
                         <TasksIcon /> Tasks
