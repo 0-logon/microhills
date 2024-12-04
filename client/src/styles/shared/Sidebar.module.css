@@ -1,7 +1,20 @@
+.toggle_btn {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    background-color: transparent;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
 .component {
     background-color: var(--bg_1);
     display: flex;
     flex-direction: column;
+    transition: .2s ease;
 }
 
 .top_line {
@@ -13,6 +26,13 @@
 
     a img {
         width: 160px;
+    }
+
+    button {
+        display: none;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
     }
 }
 
@@ -81,5 +101,33 @@
         &:hover {
             background-color: #282b3a;
         }
+    }
+}
+
+@media(max-width: 1080px) {
+    .toggle_btn {
+        display: flex;
+    }
+
+    .component {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 40%;
+        z-index: 99;
+    }
+
+    .top_line {
+        justify-content: space-between;
+
+        button {
+            display: flex;
+        }
+    }
+}
+
+@media(max-width: 720px) {
+    .component {
+        width: 100%;
     }
 }

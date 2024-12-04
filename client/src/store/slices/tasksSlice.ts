@@ -14,7 +14,7 @@ interface TasksState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     charCount: number;
-    activityOverview: { day: string; value: number }[];
+    activityOverview: { date: string; count: number }[];
 }
 
 const initialState: TasksState = {
@@ -86,9 +86,9 @@ const tasksSlice = createSlice({
                   activityMap[date] = (activityMap[date] || 0) + 1;
               });
           
-              state.activityOverview = Object.entries(activityMap).map(([day, value]) => ({
-                  day,
-                  value,
+              state.activityOverview = Object.entries(activityMap).map(([date, count]) => ({
+                  date,
+                  count,
               }));
 
             })

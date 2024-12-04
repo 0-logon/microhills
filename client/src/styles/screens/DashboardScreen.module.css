@@ -10,4 +10,19 @@
 
 .body {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.row_1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media(max-width: 860px) {
+    .row_1 {
+        grid-template-columns: 1fr;
+    }
 }

@@ -3,6 +3,7 @@ import styles from '../styles/screens/DashboardScreen.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import ActivityWidget from '../components/widgets/ActivityWidget';
+import QuoteWidget from '../components/widgets/UssageWidget';
 
 const DashboardScreen: React.FC = () => {
     const { tasks, status, error, charCount } = useSelector((state: RootState) => state.tasks);
@@ -14,7 +15,10 @@ const DashboardScreen: React.FC = () => {
                 <h1>Dashboard</h1>
             </div>
             <div className={styles.body}>
-                <ActivityWidget />
+                <div className={`${styles.row} ${styles.row_1}`}>
+                    <ActivityWidget />
+                    <QuoteWidget />
+                </div>
             </div>
         </div>
     )
