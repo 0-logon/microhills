@@ -3,7 +3,7 @@ import styles from '../../styles/widgets/Widgets.module.css';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Label } from 'recharts';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import {AppConfig} from '../../config/config';
+import { AppConfig } from '../../config/config';
 
 type DataItem = {
   name: string;
@@ -23,9 +23,10 @@ const UsageWidget = () => {
 
   const COLORS: string[] = ['#8884d8', '#b9b7e4'];
 
-  useEffect(()=> {
+  useEffect(() => {
     setPercentage(parseFloat((charCount / usageLimit * 100).toFixed(2)));
-  })
+  });
+
   return (
     <div className={`${styles.widget} ${styles.usage_widget}`}>
       <h2>Usage Overview</h2>
@@ -56,7 +57,6 @@ const UsageWidget = () => {
           <p>{`You've used ${charCount} / ${usageLimit.toLocaleString('en-US')} characters.`}</p>
           <p>Stay productive and manage your content effortlessly!</p>
           <p>Need More Space? <a href="/">Upgrade Plan</a></p>
-
         </div>
       </div>
     </div>
