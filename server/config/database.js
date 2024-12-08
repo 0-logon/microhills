@@ -8,8 +8,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     pool: {
         max: 10,        // Maximum number of connections
         min: 0,         // Minimum number of connections
-        acquire: 30000, // Maximum time to wait for a connection
-        idle: 10000     // Maximum time to wait for inactive connections before they are closed
+        // acquire: 30000, // Maximum time to wait for a connection
+        // idle: 10000     // Maximum time to wait for inactive connections before they are closed
     }
 });
 

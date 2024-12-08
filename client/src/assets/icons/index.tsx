@@ -144,3 +144,33 @@ export const BinIcon: React.FC = () => (
     ></path>
   </svg>
 );
+
+export const AscIcon: React.FC = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="17"
+    fill="none"
+    viewBox="0 0 20 17"
+  >
+    <path
+      fill="#232323"
+      d="m16 0 4 5h-3v12h-2V5h-3zm-5 15v2H0v-2zm0-7v2H0V8zM9 1v2H0V1z"
+    ></path>
+  </svg>
+);
+
+export const DescIcon: React.FC = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="17"
+    fill="none"
+    viewBox="0 0 20 17"
+  >
+    <path
+      fill="#232323"
+      d="M17 0v12h3l-4 5-4-5h3V0zM9 14v2H0v-2zm2-7v2H0V7zm0-7v2H0V0z"
+    ></path>
+  </svg>
+);

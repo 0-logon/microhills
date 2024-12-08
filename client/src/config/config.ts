@@ -1,3 +1,3 @@
 export const AppConfig = {
-    USAGE_LIMIT: 10000,
+    USAGE_LIMIT: 700,
 }

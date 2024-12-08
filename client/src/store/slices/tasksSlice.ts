@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
-// Definišemo tip za Task
 interface Task {
   id: number;
   title: string;
@@ -8,7 +7,6 @@ interface Task {
   createdAt: string;
 }
 
-// Definišemo inicijalno stanje
 interface TasksState {
   tasks: Task[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -25,12 +23,10 @@ const initialState: TasksState = {
   activityOverview: []
 };
 
-// Asinkrona funkcija za dohvatanje zadataka
 export const fetchTasks = createAsyncThunk(
   'tasks/fetchTasks',
   async (_, { rejectWithValue }) => {
     try {
-      // Preuzimanje tokena iz localStorage
       const token = localStorage.getItem('auth')
         ? JSON.parse(localStorage.getItem('auth')!).token
         : null;
@@ -39,7 +35,6 @@ export const fetchTasks = createAsyncThunk(
         throw new Error('Authentication token not found');
       }
 
-      // Slanje zahteva
       const response = await fetch('http://localhost:3000/tasks', {
         method: 'GET',
         headers: {
@@ -48,13 +43,11 @@ export const fetchTasks = createAsyncThunk(
         },
       });
 
-      // Provera da li je odgovor uspešan
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch tasks');
       }
 
-      // Vraćanje rezultata
       return await response.json();
     } catch (error: any) {
       return rejectWithValue(error.message);
@@ -72,7 +65,7 @@ const tasksSlice = createSlice({
 
       // Ažuriraj charCount i activityOverview nakon brisanja
       state.charCount = state.tasks.reduce((total, task) => {
-        return total + (task.description?.length || 0);
+        return total + (task.title?.length || 0) + (task.description?.length || 0);
       }, 0);
 
       const activityMap: { [key: string]: number } = {};
@@ -97,7 +90,7 @@ const tasksSlice = createSlice({
         state.tasks = action.payload;
 
         state.charCount = action.payload.reduce((total, task) => {
-          return total + (task.description?.length || 0);
+          return total + (task.title?.length || 0) + (task.description?.length || 0);
         }, 0);
 
         const activityMap: { [key: string]: number } = {};

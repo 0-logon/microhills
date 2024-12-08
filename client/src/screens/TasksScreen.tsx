@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/screens/TasksScreen.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
@@ -6,6 +6,7 @@ import { BinIcon } from '../assets/icons';
 import { deleteTask, fetchTasks } from '../store/slices/tasksSlice';
 import { AppConfig } from '../config/config';
 import { formatDate } from '../utils/helpers';
+import SortFilter from '../components/shared/SortFilter';
 
 interface inputData {
   title: string;
@@ -16,8 +17,10 @@ interface inputData {
 const TasksScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [editor, setEditor] = useState<boolean>(false);
+  const [allowSave, setAllowSave] = useState<boolean>(true);
   const { tasks, charCount } = useSelector((state: RootState) => state.tasks);
   const freeSpace: number = AppConfig.USAGE_LIMIT - charCount;
+  const [sort, setSort] = useState<string>('asc');
 
   const [formData, setFormData] = useState<inputData>({
     title: "",
@@ -42,6 +45,17 @@ const TasksScreen: React.FC = () => {
       };
     });
   };
+
+  useEffect(() => {
+    if (!freeSpace) {
+      setAllowSave(false);
+    }
+    else if (formData.count !== null && formData.count > freeSpace) {
+      setAllowSave(false);
+    } else {
+      setAllowSave(true);
+    }
+  }, [formData.count, freeSpace])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,7 +132,13 @@ const TasksScreen: React.FC = () => {
     <div className={styles.component}>
       <div className={styles.header}>
         <h1>Tasks</h1>
-        {editor ? <div className={styles.editor_btns}><button onClick={() => setEditor(false)}>Cancel</button> <button type='submit' form="myForm">Save</button></div> : <button onClick={() => setEditor(true)}>Add new</button>}
+        {editor ? <div className={styles.editor_btns}>
+          <button onClick={() => setEditor(false)}>Cancel</button>
+          {
+            allowSave ? <button className={styles.save_btn} type='submit' form="myForm">Save</button>
+              : <div className={styles.disabled_save}>Save</div>
+          }
+        </div> : <button onClick={() => setEditor(true)}>Add new</button>}
       </div>
       <div className={styles.body}>
         {
@@ -137,24 +157,33 @@ const TasksScreen: React.FC = () => {
               value={formData.description}
               onChange={handleChange}
             />
-            <p>{`${formData.count} / ${freeSpace.toLocaleString('en-US')}`}</p>
+            <p><span style={{ color: !allowSave ? '#b80f0f' : '' }}>{formData.count}</span> / {freeSpace.toLocaleString('en-US')}</p>
           </form>
         }
         {
           !tasks.length && <p>No tasks yet! Start by creating your first task to get organized.</p>
         }
+        <SortFilter sort={sort} setSort={setSort} />
         <div className={styles.tasks_box}>
           {
-            tasks.map((task) => (
-              <div key={task.id} className={styles.task_card}>
-                <div className={styles.task_actions}>
-                  <button onClick={() => handleDelete(task.id)}><BinIcon /></button>
+            [...tasks]
+              .sort((a, b) => {
+                if (sort === 'asc') {
+                  return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+                } else {
+                  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                }
+              })
+              .map((task) => (
+                <div key={task.id} className={styles.task_card}>
+                  <div className={styles.task_actions}>
+                    <button onClick={() => handleDelete(task.id)}><BinIcon /></button>
+                  </div>
+                  <h2>{task.title}</h2>
+                  <p>{task.description}</p>
+                  <p>{formatDate(task.createdAt)}</p>
                 </div>
-                <h2>{task.title}</h2>
-                <p>{task.description}</p>
-                <p>{formatDate(task.createdAt)}</p>
-              </div>
-            ))
+              ))
           }
         </div>
       </div>

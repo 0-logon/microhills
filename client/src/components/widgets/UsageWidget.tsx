@@ -17,8 +17,8 @@ const UsageWidget = () => {
   const usageLimit: number = AppConfig.USAGE_LIMIT;
 
   const data: DataItem[] = [
-    { name: 'Used space', value: charCount },
-    { name: 'Free space', value: usageLimit }
+    { name: 'Free space', value: usageLimit },
+    { name: 'Used space', value: percentage }
   ];
 
   const COLORS: string[] = ['#8884d8', '#b9b7e4'];
